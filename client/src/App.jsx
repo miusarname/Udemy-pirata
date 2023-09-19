@@ -1,11 +1,9 @@
-import React from "react";
-import Accord from "./components/accordion";
+import React from 'react'
 
-export default function App() {
+function App() {
   return (
-    <div>
-      <Accord accordionName="a" />
-      <Accord accordionName="a" content="asdadasd" />
-    </div>
-  );
+    <div>App</div>
+  )
 }
+
+export default App
