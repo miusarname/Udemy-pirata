@@ -1,23 +1,10 @@
-import React from "react";
-import Player from "./video/Player";
+import React from 'react'
+import Login from './log/login'
 
 export default function App() {
   return (
-    <>
-      <Player
-        list={[
-          [
-            "aa",
-            [
-              {
-                name: "Leslie Alexander",
-                href: "",
-                Desc: "leslie.s@example.com",
-              },
-            ],
-          ],
-        ]}
-      />
-    </>
-  );
+    <div>
+      <Login />
+    </div>
+  )
 }
