@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import List from '../video/components/list';
 
-const Accordion = ({ accordionName, content }) => {
+const Accordion = ({ accordionName, content=(<List />) }) => {
   // Creamos un estado local para el acordeón con el nombre proporcionado en las props
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,9 +19,9 @@ const Accordion = ({ accordionName, content }) => {
         </div>
         {/* Contenido del Acordeón (se muestra u oculta según el estado) */}
         {isOpen && (
-          <div className="p-4">
-            <p> {content}.</p>
-          </div>
+          <>
+          {content}
+          </>
         )}
       </div>
     </div>
