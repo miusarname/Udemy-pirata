@@ -1,0 +1,73 @@
+db.createCollection("usuarios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["_id", "username", "password", "email", "userType"],
+      properties: {
+        _id: { bsonType: "objectId" },
+        username: { bsonType: "string", description: "username is required" },
+        password: { bsonType: "string", description: "password is required" },
+        email: { bsonType: "string", description: "email is required" },
+        userType: {
+          bsonType: "string",
+          enum: ["estudiante", "instructor", "administrador"],
+          description: "userType is required",
+        },
+      },
+    },
+  },
+});
+
+db.createCollection("cursos", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: [
+        "_id",
+        "title",
+        "description",
+        "price",
+        "instructorId",
+        "videoLinks",
+      ],
+      properties: {
+        _id: { bsonType: "objectId" },
+        title: { bsonType: "string", description: "title is required" },
+        description: {
+          bsonType: "string",
+          description: "description is required",
+        },
+        price: { bsonType: "number", description: "price is required" },
+        instructorId: {
+          bsonType: "objectId",
+          description: "instructorId is required",
+        },
+        videoLinks: {
+          bsonType: "array",
+          items: { bsonType: "string" },
+          description: "videoLinks is required",
+        },
+      },
+    },
+  },
+});
+
+db.createCollection("estudiantes", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["_id", "name", "contactInfo"],
+      properties: {
+        _id: { bsonType: "objectId" },
+        name: { bsonType: "string", description: "name is required" },
+        contactInfo: {
+          bsonType: "string",
+          description: "contactInfo is required",
+        },
+      },
+    },
+  },
+});
