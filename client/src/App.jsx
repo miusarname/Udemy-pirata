@@ -1,10 +1,34 @@
-import React from 'react'
-import Login from './log/login'
+import React from "react";
+import Navbar from "./global/Navbar";
+import Acordion from "./global/accordion";
+import List from "./video/components/list";
+import Player from "./video/components/play";
 
-export default function App() {
+function App({ list }) {
   return (
-    <div>
-      <Login />
-    </div>
-  )
+    <>
+      <aside
+        id="separator-sidebar"
+        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        aria-label="Sidebar"
+      >
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+          {list.map((item, index) => (
+            <Acordion
+              key={index}
+              accordionName={item[0]}
+              content={<List people={item[1]} />}
+            />
+          ))}
+          a
+        </div>
+      </aside>
+
+      <div className="p-4 sm:ml-64">
+        <Player link="https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164" />
+      </div>
+    </>
+  );
 }
+
+export default App;
