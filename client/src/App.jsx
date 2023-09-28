@@ -1,11 +1,10 @@
-import React from "react";
-import Accord from "./components/accordion";
+import React from 'react'
+import Login from './log/login'
 
 export default function App() {
   return (
     <div>
-      <Accord accordionName="a" />
-      <Accord accordionName="a" content="asdadasd" />
+      <Login />
     </div>
-  );
+  )
 }
