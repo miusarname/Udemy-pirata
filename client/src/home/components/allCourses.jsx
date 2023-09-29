@@ -7,7 +7,7 @@ export default function allcourses({
       imageSrc: "https://midu.dev/images/tags/node.png",
       imageAlt: "Front of men's Basic Tee in blacks",
       price: "$35",
-      color: "Black",
+      description: "Black",
     },
   ],
   title,
@@ -37,7 +37,7 @@ export default function allcourses({
                       {product.name}
                     </a>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                  <p className="mt-1 text-sm text-gray-500">{product.description}</p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
                   {product.price}

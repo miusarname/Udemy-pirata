@@ -1,51 +1,63 @@
 import Navbar from "../global/Navbar";
+import  { useState, useEffect } from "react";
 import Hero from "../global/Hero";
 import Cta from "../global/CTA";
 import List from "./components/allCourses";
 import Footer from "../global/footer";
 
 function Home() {
-  let products = [
-    {
-      id: 1,
-      name: "Node.Js: De cero a experto",
-      href: "#",
-      imageSrc: "https://midu.dev/images/tags/node.png",
-      imageAlt: "Logo Node",
-      color:
-        "Aprende Node.js desde los fundamentos, usos comunes y no tan comunes, despliegues, construcción de imágenes, testing y muchas más habilidades que son necesarias hoy en día con este runtime-environment de JavaScript.",
-    },
-    {
-      id: 2,
-      name: "Docker - Guía práctica de uso para desarrolladores",
-      href: "#",
-      imageSrc:
-        "https://d1.awsstatic.com/acs/characters/Logos/Docker-Logo_Horizontel_279x131.b8a5c41e56b77706656d61080f6a0217a3ba356d.png",
-      imageAlt: "Logo Doceker",
-      color:
-        "Aquí aprenderás Docker y para qué te puede servir, aprende a utilizar y crear imágenes, controlar el versionamiento y construcción automática de las mismas.",
-    },
-    {
-      id: 3,
-      name: "React: De cero a experto ( Hooks y MERN )",
-      href: "#",
-      imageSrc:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png",
-      imageAlt: "Logo React",
-      color:
-        "El objetivo principal es simple, mejorar tus habilidades existentes de React. No es un curso para personas que quieran empezar con esta librería. El curso está dirigido a personas que ya tengan conocimientos de React con Hooks.",
-    },
-    {
-      id: 4,
-      name: "JavaScript Moderno: Guía para dominar el lenguaje",
-      href: "#",
-      imageSrc:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png",
-      imageAlt: "Logo JavaScript",
-      color:
-        "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const [organizedUserData, setOrganizedUserData] = useState([]);
+
+  useEffect(() => {
+    // Realizar la solicitud Fetch aquí y asignar los datos a los estados locales
+    fetch('http://localhost:3000/video_play')
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === 'success') {
+          const tempProducts = [];
+          const tempOrganizedUserData = [];
+
+          data.user.forEach((user, index) => {
+            tempProducts.push({
+              id: index + 1,
+              name: user.name,
+              href: user.href,
+              imageSrc: user.imageSrc,
+              imageAlt: user.imageAlt,
+              description: user.description,
+            });
+
+            tempOrganizedUserData.push({
+              _id: user._id,
+              name: user.name,
+              description: user.description,
+              href: user.href,
+              imageSrc: user.imageSrc,
+              imageAlt: user.imageAlt,
+              videoLinks: user.videoLinks.map(videoLink => ({
+                name: videoLink[0],
+                links: videoLink[1].map(linkData => ({
+                  name: linkData.name,
+                  href: linkData.href,
+                  Desc: linkData.Desc,
+                })),
+              })),
+            });
+          });
+
+          // Ordenar "products" en el orden especificado
+          tempProducts.sort((a, b) => a.id - b.id);
+
+          // Actualizar los estados locales
+          setProducts(tempProducts);
+          setOrganizedUserData(tempOrganizedUserData);
+        }
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud Fetch:', error);
+      });
+  }, []); 
 
   let navbarContains =[
     { name: "Todos los Cursos ", href: "#", current: false },
