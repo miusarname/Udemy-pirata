@@ -1,4 +1,4 @@
-export default function Example({
+export default function allcourses({
   products = [
     {
       id: 1,

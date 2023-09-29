@@ -47,9 +47,16 @@ function Home() {
     },
   ];
 
+  let navbarContains =[
+    { name: "Todos los Cursos ", href: "#", current: false },
+    { name: "Programas de Estudio ", href: "#", current: false },
+    { name: "CampusLands", href: "https://campuslands.com/", current: false },
+    { name: "Talento", href: "#", current: false },
+  ]
+
   return (
     <>
-      <Navbar />
+      <Navbar navigation={navbarContains}/>
       <Hero
         images=""
         links={[]}
