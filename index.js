@@ -4,10 +4,9 @@ import morgan from "morgan";
 import passport from "passport";
 import routesVersioning from "express-routes-versioning";
 import { limitGrt } from "./config/limiter.js";
+import { Obtenervideos } from "./version/v1/action_v1.js";
+import cors from "cors";
 import { crearToken, validarToken } from "./config/JWT.js";
-// import { reports } from "./routes/reports.routes.js";
-// import { campers } from "./routes/campers.routes.js";
-// import { Trainers } from "./routes/trainers.routes.js";
 
 // Environment variables
 dotenv.config();
@@ -21,6 +20,7 @@ index.set("port", process.env.PORT || 3000);
 
 // Middlewares
 index.use(morgan("dev"));
+index.use(cors());
 index.use(express.json());
 index.use(limitGrt());
 index.use(passport.initialize());
@@ -28,15 +28,8 @@ index.use(passport.initialize());
 // Routes
 index.use("/token", crearToken);
 
-// Rutas para admin (permisos de acceso: admin)
-// index.use(
-//   "/admin",
-//   validarToken,
-//   version({
-//     "3.0.0": reports,
-//     fallbackVersion: "2.0.0" 
-//   })
-// );
+//Rutas para admin (permisos de acceso: admin)
+index.get("/video_play", Obtenervideos);
 
 // // Rutas para camper (permisos de acceso: camper)
 // index.use(
@@ -44,7 +37,7 @@ index.use("/token", crearToken);
 //   validarToken,
 //   version({
 //     "2.0.0": campers,
-//     fallbackVersion: "2.0.0" 
+//     fallbackVersion: "2.0.0"
 //   })
 // );
 
@@ -54,13 +47,13 @@ index.use("/token", crearToken);
 //   validarToken,
 //   version({
 //     "1.0.0": Trainers,
-//     fallbackVersion: "2.0.0" 
+//     fallbackVersion: "2.0.0"
 //   })
 // );
 
-index.use('/',(req,res)=>{
-  res.send('a')
-})
+index.use("/", (req, res) => {
+  res.send("a");
+});
 // Server
 index.listen(index.get("port"), () => {
   console.log("Server on port " + index.get("port"));
