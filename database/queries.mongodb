@@ -14,27 +14,56 @@ db.transacciones.insertOne({
     userType: "estudiante"
   })
 
-  
-  db.cursos.insertOne({
-    _id: ObjectId(),
-    title: "Introducción a MongoDB",
-    description: "Aprende a trabajar con MongoDB",
-    price: 49.99,
-    instructorId: ObjectId("5f7f50e9cbb13a2e8c5a19e0"),
-    videoLinks: ["enlace_video_1", "enlace_video_2"]
-  })
-  
   db.estudiantes.insertOne({
-    _id: ObjectId(),
     name: "Juan Pérez",
     contactInfo: "juan@example.com"
   })
   
   db.transacciones.insertOne({
-    _id: ObjectId(),
     courseId: ObjectId("5f7f5117cbb13a2e8c5a19e1"),
     studentId: ObjectId("5f7f5123cbb13a2e8c5a19e2"),
     purchaseDate: new Date(),
     amountPaid: 29.99
   })
   
+  db.cursos.insertOne({
+  name: "Node.Js: De cero a experto",
+  description:
+    "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
+  href: "#",
+  imageSrc: "https://midu.dev/images/tags/node.png",
+  imageAlt: "Logo Node",
+  videoLinks: [
+    [
+      "Node.Js: De cero a experto",
+      [
+        {
+          name: "video1",
+          href: "linkvideo1",
+          Desc: "primer holamundo con js",
+        },
+      ],
+    ],
+  ],
+});
+
+db.cursos.insertOne({
+  name: "Node.Js: De cero a experto",
+  description:
+    "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
+  href: "#",
+  imageSrc: "https://midu.dev/images/tags/node.png",
+  imageAlt: "Logo Node",
+  videoLinks: [
+    [
+      "Node.Js: De cero a experto",
+      [
+        {
+          name: "video1",
+          href: "linkvideo1",
+          Desc: "primer holamundo con js",
+        },
+      ],
+    ],
+  ],
+});

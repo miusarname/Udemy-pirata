@@ -19,7 +19,6 @@ db.createCollection("usuarios", {
     },
   },
 });
-
 db.createCollection("cursos", {
   validator: {
     $jsonSchema: {
@@ -27,33 +26,54 @@ db.createCollection("cursos", {
       additionalProperties: false,
       required: [
         "_id",
-        "title",
+        "name",
         "description",
-        "price",
-        "instructorId",
+        "href",
+        "imageSrc",
+        "imageAlt",
         "videoLinks",
       ],
       properties: {
-        _id: { bsonType: "objectId" },
-        title: { bsonType: "string", description: "title is required" },
+        _id: { bsonType: "objectId" }, // Mantenemos el campo _id
+        name: { bsonType: "string", description: "name is required" },
         description: {
           bsonType: "string",
           description: "description is required",
         },
-        price: { bsonType: "number", description: "price is required" },
-        instructorId: {
-          bsonType: "objectId",
-          description: "instructorId is required",
-        },
+        href: { bsonType: "string", description: "href is required" },
+        imageSrc: { bsonType: "string", description: "imageSrc is required" },
+        imageAlt: { bsonType: "string", description: "imageAlt is required" },
         videoLinks: {
           bsonType: "array",
-          items: { bsonType: "string" },
+          items: {
+            bsonType: "array",
+            items: [
+              {
+                bsonType: "string",
+                description: "name of the video is required",
+              },
+              {
+                bsonType: "array",
+                items: {
+                  bsonType: "object",
+                  required: ["name", "href", "Desc"],
+                  properties: {
+                    name: { bsonType: "string", description: "name is required" },
+                    href: { bsonType: "string", description: "href is required" },
+                    Desc: { bsonType: "string", description: "Desc is required" },
+                  },
+                },
+                description: "video data is required",
+              },
+            ],
+          },
           description: "videoLinks is required",
         },
       },
     },
   },
 });
+
 
 db.createCollection("estudiantes", {
   validator: {
