@@ -1,3 +1,5 @@
+use('udemy');
+
 db.createCollection("usuarios", {
   validator: {
     $jsonSchema: {
