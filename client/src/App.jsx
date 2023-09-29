@@ -1,10 +1,13 @@
 import React from 'react'
 import Login from './log/login'
 
-export default function App() {
+
+function App({ list }) {
   return (
     <div>
       <Login />
     </div>
   )
 }
+
+export default App;

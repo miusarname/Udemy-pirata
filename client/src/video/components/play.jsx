@@ -44,6 +44,7 @@ export default function Example({ link }) {
               Discuriones/Comentarios
             </button>
           </div>
+
         </div>
       </header>
       <main>
@@ -79,6 +80,7 @@ export default function Example({ link }) {
           {/* Agrega aquí tus elementos de menú */}
         </div>
       </div>
+
     </>
   );
 }
