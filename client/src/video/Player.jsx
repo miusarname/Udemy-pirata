@@ -1,37 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../global/Navbar";
 import Acordion from "../global/accordion";
 import List from "./components/list";
 import Player from "./components/play";
 
 /** 
- * [
-          [
-            "aa",
+   * [
             [
-              {
-                name: "Leslie Alexander",
-                href: "",
-                Desc: "leslie.s@example.com",
-              },
+              "aa",
+              [
+                {
+                  name: "Leslie Alexander",
+                  href: "",
+                  Desc: "leslie.s@example.com",
+                },
+              ],
             ],
-          ],
-        ]
- */
-function App({
-  list = [
-    [
-      "aa",
-      [
-        {
-          name: "Leslie Alexander",
-          href: "",
-          Desc: "leslie.s@example.com",
-        },
-      ],
-    ],
-  ],
-}) {
+          ]
+  */
+function App() {
+  const [videoLinks, setVideoLinks] = useState([]); // Estado para almacenar videoLinks
+
+  useEffect(() => {
+    // Obtener el valor del parámetro 'curso' de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const curso = urlParams.get("curso");
+
+    // Comprobar si 'curso' tiene un valor y realizar la solicitud fetch
+    if (curso) {
+      // Construir la URL de la solicitud fetch
+      const apiUrl = `http://localhost:3000/cursos?course=${curso}`;
+
+      // Realizar la solicitud fetch
+      fetch(apiUrl)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Error en la solicitud fetch");
+          }
+        })
+        .then((data) => {
+          // Obtener 'videoLinks' de la respuesta y almacenar en el estado
+          console.log(data.user[0].videoLinks)
+          if (data.user[0].videoLinks) {
+            setVideoLinks(data.user[0].videoLinks);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
   return (
     <>
       <Navbar />
@@ -41,7 +61,7 @@ function App({
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          {list.map((item, index) => (
+          {videoLinks.map((item, index) => (
             <Acordion
               key={index}
               accordionName={item[0]}

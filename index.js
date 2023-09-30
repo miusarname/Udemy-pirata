@@ -4,7 +4,7 @@ import morgan from "morgan";
 import passport from "passport";
 import routesVersioning from "express-routes-versioning";
 import { limitGrt } from "./config/limiter.js";
-import { Obtenervideos } from "./version/v1/action_v1.js";
+import { Obtenervideos,ObtenervideosCurso } from "./version/v1/action_v1.js";
 import cors from "cors";
 import { crearToken, validarToken } from "./config/JWT.js";
 
@@ -29,7 +29,9 @@ index.use(passport.initialize());
 index.use("/token", crearToken);
 
 //Rutas para admin (permisos de acceso: admin)
-index.get("/video_play", Obtenervideos);
+index.get("/list-all-courses", Obtenervideos);
+index.get("/cursos", ObtenervideosCurso);
+
 
 // // Rutas para camper (permisos de acceso: camper)
 // index.use(
