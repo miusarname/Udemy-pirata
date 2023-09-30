@@ -11,7 +11,7 @@ function Home() {
 
   useEffect(() => {
     // Realizar la solicitud Fetch aquí y asignar los datos a los estados locales
-    fetch('http://localhost:3000/video_play')
+    fetch('http://localhost:3000/list-all-courses')
       .then(response => response.json())
       .then(data => {
         if (data.message === 'success') {

@@ -1,32 +1,32 @@
-use('udemy');
+use("udemy");
 
 db.transacciones.insertOne({
-    courseId: ObjectId("5f7f5117cbb13a2e8c5a19e1"),
-    studentId: ObjectId("5f7f5123cbb13a2e8c5a19e2"),
-    purchaseDate: new Date(),
-    amountPaid: 29.99
-  })
- 
-  db.usuarios.insertOne({
-    username: "ejemplo_usuario",
-    password: "contraseña_segura",
-    email: "usuario@example.com",
-    userType: "estudiante"
-  })
+  courseId: ObjectId("5f7f5117cbb13a2e8c5a19e1"),
+  studentId: ObjectId("5f7f5123cbb13a2e8c5a19e2"),
+  purchaseDate: new Date(),
+  amountPaid: 29.99,
+});
 
-  db.estudiantes.insertOne({
-    name: "Juan Pérez",
-    contactInfo: "juan@example.com"
-  })
-  
-  db.transacciones.insertOne({
-    courseId: ObjectId("5f7f5117cbb13a2e8c5a19e1"),
-    studentId: ObjectId("5f7f5123cbb13a2e8c5a19e2"),
-    purchaseDate: new Date(),
-    amountPaid: 29.99
-  })
-  
-  db.cursos.insertOne({
+db.usuarios.insertOne({
+  username: "ejemplo_usuario",
+  password: "contraseña_segura",
+  email: "usuario@example.com",
+  userType: "estudiante",
+});
+
+db.estudiantes.insertOne({
+  name: "Juan Pérez",
+  contactInfo: "juan@example.com",
+});
+
+db.transacciones.insertOne({
+  courseId: ObjectId("5f7f5117cbb13a2e8c5a19e1"),
+  studentId: ObjectId("5f7f5123cbb13a2e8c5a19e2"),
+  purchaseDate: new Date(),
+  amountPaid: 29.99,
+});
+
+db.cursos.insertOne({
   name: "Node.Js: De cero a experto",
   description:
     "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
@@ -46,6 +46,52 @@ db.transacciones.insertOne({
     ],
   ],
 });
+
+// use('udemy');
+
+// db.cursos.insertOne({
+//   name: "Docker",
+//   description:
+//     "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
+//   href: "#",
+//   imageSrc: "https://midu.dev/images/tags/node.png",
+//   imageAlt: "Logo Node",
+//   videoLinks: [
+//     [
+//       "Node.Js: De cero a experto",
+//       [
+//         {
+//           name: "video1",
+//           href: "linkvideo1",
+//           Desc: "primer holamundo con js",
+//         },
+//       ],
+//     ],
+//   ],
+// });
+
+  use("udemy");
+
+  db.cursos.insertOne({
+    name: "Node",
+    description:
+      "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
+    href: "http://localhost:5173/video?curso=Docker ",
+    imageSrc: "https://midu.dev/images/tags/node.png",
+    imageAlt: "Logo Node",
+    videoLinks: [
+      [
+        "Node.Js: De cero a experto",
+        [
+          {
+            name: "video1",
+            href: "linkvideo1",
+            Desc: "primer holamundo con js",
+          },
+        ],
+      ],
+    ],
+  });
 
 db.cursos.insertOne({
   name: "Node.Js: De cero a experto",
