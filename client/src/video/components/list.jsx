@@ -11,7 +11,7 @@ export default function Example({
   return (
     <ul role="list" className="divide-y divide-gray-100">
       {people.map((person) => (
-        <a href={person.href}>
+        <a href={'/video?m='+person.href}>
             <li key={person.email} className="flex justify-between gap-x-6 py-5">
           <div className="flex min-w-0 gap-x-4">
             <div className="min-w-0 flex-auto">
