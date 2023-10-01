@@ -19,19 +19,18 @@ import Player from "./components/play";
           ]
   */
 function App() {
-  const [videoLinks, setVideoLinks] = useState([]); // Estado para almacenar videoLinks
+  const [videoLinks, setVideoLinks] = useState([]);
+  const [videoUrl, setVideoUrl] = useState(
+    "https://platform.thinkific.com/videoproxy/v1/play/cehovah05o4e97oc6pd0?&autoplay=true&crosstime=203"
+  );
 
   useEffect(() => {
-    // Obtener el valor del parámetro 'curso' de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const curso = urlParams.get("curso");
 
-    // Comprobar si 'curso' tiene un valor y realizar la solicitud fetch
     if (curso) {
-      // Construir la URL de la solicitud fetch
       const apiUrl = `http://localhost:3000/cursos?course=${curso}`;
 
-      // Realizar la solicitud fetch
       fetch(apiUrl)
         .then((response) => {
           if (response.ok) {
@@ -41,8 +40,6 @@ function App() {
           }
         })
         .then((data) => {
-          // Obtener 'videoLinks' de la respuesta y almacenar en el estado
-          console.log(data.user[0].videoLinks)
           if (data.user[0].videoLinks) {
             setVideoLinks(data.user[0].videoLinks);
           }
@@ -51,7 +48,33 @@ function App() {
           console.error(error);
         });
     }
+
+    const mParam = urlParams.get("m");
+    if (mParam) {
+      fetch("http://localhost:3000/encript", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ encryptedValue: mParam }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Error en la solicitud fetch de desencriptación");
+          }
+        })
+        .then((data) => {
+          // Cambia la URL del video a la URL desencriptada
+          setVideoUrl(data.url);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, []);
+
   return (
     <>
       <Navbar />
@@ -72,7 +95,7 @@ function App() {
       </aside>
 
       <div className="p-4 sm:ml-64">
-        <Player link="https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164" />
+        <Player link={videoUrl} />{" "}
       </div>
     </>
   );
