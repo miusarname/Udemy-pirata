@@ -6,6 +6,7 @@ import routesVersioning from "express-routes-versioning";
 import { limitGrt } from "./config/limiter.js";
 import { Obtenervideos,ObtenervideosCurso } from "./version/v1/action_v1.js";
 import cors from "cors";
+import {decrypt} from './version/extra/extras_actions.js';
 import { crearToken, validarToken } from "./config/JWT.js";
 
 // Environment variables
@@ -31,6 +32,7 @@ index.use("/token", crearToken);
 //Rutas para admin (permisos de acceso: admin)
 index.get("/list-all-courses", Obtenervideos);
 index.get("/cursos", ObtenervideosCurso);
+index.post("/encript", decrypt)
 
 
 // // Rutas para camper (permisos de acceso: camper)
