@@ -1,4 +1,4 @@
-use('udemy');
+use("udemy");
 db.createCollection("usuarios", {
   validator: {
     $jsonSchema: {
@@ -58,9 +58,18 @@ db.createCollection("cursos", {
                   bsonType: "object",
                   required: ["name", "href", "Desc"],
                   properties: {
-                    name: { bsonType: "string", description: "name is required" },
-                    href: { bsonType: "string", description: "href is required" },
-                    Desc: { bsonType: "string", description: "Desc is required" },
+                    name: {
+                      bsonType: "string",
+                      description: "name is required",
+                    },
+                    href: {
+                      bsonType: "string",
+                      description: "href is required",
+                    },
+                    Desc: {
+                      bsonType: "string",
+                      description: "Desc is required",
+                    },
                   },
                 },
                 description: "video data is required",
@@ -74,26 +83,7 @@ db.createCollection("cursos", {
   },
 });
 
-
-db.createCollection("estudiantes", {
-  validator: {
-    $jsonSchema: {
-      bsonType: "object",
-      additionalProperties: false,
-      required: ["_id", "name", "contactInfo"],
-      properties: {
-        _id: { bsonType: "objectId" },
-        name: { bsonType: "string", description: "name is required" },
-        contactInfo: {
-          bsonType: "string",
-          description: "contactInfo is required",
-        },
-      },
-    },
-  },
-});
-
-use('udemy');
+use("udemy");
 db.createCollection("comentarios", {
   validator: {
     $jsonSchema: {
@@ -109,4 +99,3 @@ db.createCollection("comentarios", {
     },
   },
 });
-
