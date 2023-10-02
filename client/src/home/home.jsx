@@ -2,7 +2,7 @@ import Navbar from "../global/Navbar";
 import  { useState, useEffect } from "react";
 import Hero from "../global/Hero";
 import Cta from "../global/CTA";
-import List from "./components/allCourses";
+import List from "../global/allCourses";
 import Footer from "../global/footer";
 
 function Home() {

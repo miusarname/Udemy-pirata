@@ -1,11 +1,10 @@
 import React from 'react'
-import Login from './log/login'
-
+import Lista from './pages/programas_de_estudio';
 
 function App({ list }) {
   return (
     <div>
-      <Login />
+      <Lista />
     </div>
   )
 }

@@ -49,7 +49,10 @@ index.get("/cursos", ObtenervideosCurso);
 index.post("/encript", decrypt);
 index.post("/create-comment", crearComentario);
 index.get("/comments", ObtenerComentariosVideo);
-index.get("/login",passport.authenticate("discord",{failureRedirect:'/comments'}),(req,res) => {
+index.get("/return", (req, res) => {
+  res.redirect("http://localhost:5173/")
+})
+index.get("/login",passport.authenticate("discord",{failureRedirect:'/return'}),(req,res) => {
   console.log(req.user.guilds[6])
   res.send('a')
 });

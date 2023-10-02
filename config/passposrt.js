@@ -18,9 +18,14 @@ passport.use(
       scope: ["identify","guilds"],
     },
     (accesstoken, refreshToken, profile, cb) => {
-      process.nextTick(() => {
-        return cb(null, profile);
-      });
+      if (profile.guilds.find(g => g.id === '110158199435347526')){
+        console.log(profile)
+        process.nextTick(() => {
+          return cb(null, profile);
+        });
+      } else {
+        return cb(null, false);
+      }
     }
   )
 );
