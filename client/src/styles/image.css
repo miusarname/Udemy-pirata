@@ -1,0 +1,5 @@
+.custom-button .custom-image {
+    width: 40%; /* Reduce el ancho al 50% del tamaño original */
+    height: auto; /* Mantén la proporción de aspecto original */
+  }
+  

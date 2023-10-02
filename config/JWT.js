@@ -73,8 +73,7 @@ export const crearToken = async (req, res) => {
   const encoder = new TextEncoder();
   if (
     req.body.role == "admin" ||
-    req.body.role == "camper" ||
-    req.body.role == "trainer"
+    req.body.role == "camper"
   ) {
     const jwtConstructor = await new SignJWT(req.body)
       .setProtectedHeader({ alg: "HS256", typ: "JWT" })

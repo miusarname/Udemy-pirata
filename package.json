@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": " nodemon index.js",
@@ -17,12 +18,17 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-rate-limit": "^7.0.0",
     "express-routes-versioning": "^1.0.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
     "jose": "^4.14.6",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "passport": "^0.6.0",
+    "passport-discord": "^0.1.4",
     "passport-http-bearer": "^1.0.1",
     "react-router-dom": "^6.16.0"
   }
