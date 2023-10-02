@@ -92,3 +92,21 @@ db.createCollection("estudiantes", {
     },
   },
 });
+
+use('udemy');
+db.createCollection("comentarios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["_id", "content", "author", "videoId"],
+      properties: {
+        _id: { bsonType: "objectId" }, // Mantenemos el campo _id
+        content: { bsonType: "string", description: "content is required" },
+        author: { bsonType: "string", description: "author is required" },
+        videoId: { bsonType: "string", description: "videoId is required" },
+      },
+    },
+  },
+});
+

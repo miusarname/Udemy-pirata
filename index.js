@@ -5,6 +5,7 @@ import passport from "passport";
 import routesVersioning from "express-routes-versioning";
 import { limitGrt } from "./config/limiter.js";
 import { Obtenervideos,ObtenervideosCurso } from "./version/v1/action_v1.js";
+import { ObtenerComentariosVideo,crearComentario } from "./version/pageA/pageActions.js";
 import cors from "cors";
 import {decrypt} from './version/extra/extras_actions.js';
 import { crearToken, validarToken } from "./config/JWT.js";
@@ -23,7 +24,7 @@ index.set("port", process.env.PORT || 3000);
 index.use(morgan("dev"));
 index.use(cors());
 index.use(express.json());
-index.use(limitGrt());
+//index.use(limitGrt());
 index.use(passport.initialize());
 
 // Routes
@@ -33,6 +34,8 @@ index.use("/token", crearToken);
 index.get("/list-all-courses", Obtenervideos);
 index.get("/cursos", ObtenervideosCurso);
 index.post("/encript", decrypt)
+index.post('/create-comment', crearComentario)
+index.get('/comments', ObtenerComentariosVideo)
 
 
 // // Rutas para camper (permisos de acceso: camper)

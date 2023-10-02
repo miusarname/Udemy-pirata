@@ -150,3 +150,11 @@ db.cursos.insertOne({
     ],
   ],
 });
+
+use("udemy");
+
+db.comentarios.insertOne({
+  content: "Este video es muy informativo.",
+  author: "usuario123",
+  videoId: "https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164"
+});
