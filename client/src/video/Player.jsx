@@ -4,76 +4,58 @@ import Acordion from "../global/accordion";
 import List from "./components/list";
 import Player from "./components/play";
 
-/** 
-   * [
-            [
-              "aa",
-              [
-                {
-                  name: "Leslie Alexander",
-                  href: "",
-                  Desc: "leslie.s@example.com",
-                },
-              ],
-            ],
-          ]
-  */
 function App() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseName = urlParams.get("curso") || 1;
   const [videoLinks, setVideoLinks] = useState([]);
   const [videoUrl, setVideoUrl] = useState(
     "https://platform.thinkific.com/videoproxy/v1/play/cehovah05o4e97oc6pd0?&autoplay=true&crosstime=203"
   );
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
     const curso = urlParams.get("curso");
+    const mParam = urlParams.get("m");
 
-    if (curso) {
-      const apiUrl = `http://localhost:3000/cursos?course=${curso}`;
+    const fetchData = async () => {
+      try {
+        if (curso) {
+          const apiUrl = `http://localhost:3000/cursos?course=${curso}`;
+          const response = await fetch(apiUrl);
 
-      fetch(apiUrl)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
+          if (!response.ok) {
             throw new Error("Error en la solicitud fetch");
           }
-        })
-        .then((data) => {
+
+          const data = await response.json();
+
           if (data.user[0].videoLinks) {
             setVideoLinks(data.user[0].videoLinks);
           }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+        }
 
-    const mParam = urlParams.get("m");
-    if (mParam) {
-      fetch("http://localhost:3000/encript", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ encryptedValue: mParam }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
+        if (mParam) {
+          const response = await fetch("http://localhost:3000/encript", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ encryptedValue: mParam }),
+          });
+
+          if (!response.ok) {
             throw new Error("Error en la solicitud fetch de desencriptación");
           }
-        })
-        .then((data) => {
-          // Cambia la URL del video a la URL desencriptada
+
+          const data = await response.json();
           setVideoUrl(data.url);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, []);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [urlParams]);
 
   return (
     <>
@@ -88,15 +70,17 @@ function App() {
             <Acordion
               key={index}
               accordionName={item[0]}
-              content={<List people={item[1]} />}
+              content={<List people={item[1]} coursenam={courseName} />}
             />
           ))}
         </div>
       </aside>
 
-      <div className="p-4 sm:ml-64">
-        <Player link={videoUrl} />{" "}
-      </div>
+      {videoLinks.map((item, index) => (
+        <div className="p-4 sm:ml-64" key={index}>
+          <Player link={videoUrl} />
+        </div>
+      ))}
     </>
   );
 }
