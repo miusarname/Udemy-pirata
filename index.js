@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import {encrypt} from './version/v1/action_v1.js';
 import dotenv from "dotenv";
 import morgan from "morgan";
 // import { session } from "passport";
@@ -53,8 +54,9 @@ index.get("/return", (req, res) => {
   res.redirect("http://localhost:5173/")
 })
 index.get("/login",passport.authenticate("discord",{failureRedirect:'/return'}),(req,res) => {
-  console.log(req.user.guilds[6])
-  res.send('a')
+  console.log(req.user)
+  let creedentials = encrypt(JSON.stringify(req.user))
+  res.redirect("http://localhost:5173/home?c="+creedentials)
 });
 
 // // Rutas para camper (permisos de acceso: camper)

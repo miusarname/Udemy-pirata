@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../global/Navbar";
 import Acordion from "../global/accordion";
+import { getCookie } from "../home/home.jsx";
 import List from "./components/list";
 import Player from "./components/play";
 
 function App() {
+  if (getCookie("Credentials") == "") {
+    window.location.href = "/";
+  }
   const urlParams = new URLSearchParams(window.location.search);
   const courseName = urlParams.get("curso") || 1;
   const [videoLinks, setVideoLinks] = useState([]);
@@ -55,7 +59,7 @@ function App() {
     };
 
     fetchData();
-  }, [urlParams]);
+  }, []);
 
   return (
     <>

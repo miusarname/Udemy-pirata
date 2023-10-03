@@ -1,8 +1,12 @@
 import List from "../global/allCourses";
-import  { useState, useEffect } from "react";
+import { getCookie } from "../home/home.jsx";
+import { useState, useEffect } from "react";
 import Navbar from "../global/Navbar";
 
 export default function ProgramaDeStudio() {
+  if (getCookie("Credentials") == "") {
+    window.location.href = "/";
+  }
   const [products, setProducts] = useState([]);
   const [organizedUserData, setOrganizedUserData] = useState([]);
 
@@ -23,6 +27,7 @@ export default function ProgramaDeStudio() {
               imageSrc: user.imageSrc,
               imageAlt: user.imageAlt,
               description: user.description,
+              videoLink: user.videoLinks
             });
 
             tempOrganizedUserData.push({
@@ -57,7 +62,7 @@ export default function ProgramaDeStudio() {
   }, []);
 
   let navbarContains = [
-    { name: "Todos los Cursos ", href: "#", current: true    },
+    { name: "Todos los Cursos ", href: "#", current: true },
     { name: "Programas de Estudio ", href: "#", current: false },
     { name: "CampusLands", href: "https://campuslands.com/", current: false },
     { name: "Talento", href: "#", current: false },

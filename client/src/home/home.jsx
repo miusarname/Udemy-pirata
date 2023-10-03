@@ -1,20 +1,70 @@
 import Navbar from "../global/Navbar";
-import  { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 import Hero from "../global/Hero";
 import Cta from "../global/CTA";
 import List from "../global/allCourses";
 import Footer from "../global/footer";
 
+export function getCookie(nombre) {
+  const name = nombre + "=";
+  const cookies = decodeURIComponent(document.cookie).split(";");
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+}
+
 function Home() {
   const [products, setProducts] = useState([]);
   const [organizedUserData, setOrganizedUserData] = useState([]);
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseName = urlParams.get("c") || 1;
+  function setCookie(nombre, valor, diasParaExpirar) {
+    const fecha = new Date();
+    fecha.setTime(fecha.getTime() + diasParaExpirar * 60 * 60 * 1000);
+    const expira = "expires=" + fecha.toUTCString();
+    document.cookie = nombre + "=" + valor + ";" + expira + ";path=/";
+  }
+
+  async function getdate() {
+    if (courseName != 1) {
+      const url = window.location.href;
+      const index = url.indexOf("?");
+      const response = await fetch("http://localhost:3000/encript", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ encryptedValue: courseName }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error en la solicitud fetch de desencriptación");
+      }
+
+      const data = await response.json();
+      var parsedData = data.url;
+      setCookie("Credentials", parsedData, 0.5);
+      const baseUrl = index !== -1 ? url.slice(0, index) : url;
+      // Redireccionar a una nueva URL
+      window.location.href = baseUrl;
+    }
+  }
 
   useEffect(() => {
     // Realizar la solicitud Fetch aquí y asignar los datos a los estados locales
-    fetch('http://localhost:3000/list-all-courses')
-      .then(response => response.json())
-      .then(data => {
-        if (data.message === 'success') {
+    getdate();
+    if (getCookie("Credentials") == "") {
+      window.location.href = "/";
+    }
+    fetch("http://localhost:3000/list-all-courses")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === "success") {
           const tempProducts = [];
           const tempOrganizedUserData = [];
 
@@ -26,6 +76,7 @@ function Home() {
               imageSrc: user.imageSrc,
               imageAlt: user.imageAlt,
               description: user.description,
+              videoLinks: user.videoLinks
             });
 
             tempOrganizedUserData.push({
@@ -35,40 +86,44 @@ function Home() {
               href: user.href,
               imageSrc: user.imageSrc,
               imageAlt: user.imageAlt,
-              videoLinks: user.videoLinks.map(videoLink => ({
+              videoLinks: user.videoLinks.map((videoLink) => {
+                return({
                 name: videoLink[0],
-                links: videoLink[1].map(linkData => ({
+                links: videoLink[1].map((linkData) => ({
                   name: linkData.name,
                   href: linkData.href,
                   Desc: linkData.Desc,
                 })),
-              })),
+              })}),
             });
           });
 
           // Ordenar "products" en el orden especificado
           tempProducts.sort((a, b) => a.id - b.id);
 
+          console.log(tempOrganizedUserData,'lista de product')
+          console.log(tempProducts,'temporal')
+
           // Actualizar los estados locales
           setProducts(tempProducts);
           setOrganizedUserData(tempOrganizedUserData);
         }
       })
-      .catch(error => {
-        console.error('Error al realizar la solicitud Fetch:', error);
+      .catch((error) => {
+        console.error("Error al realizar la solicitud Fetch:", error);
       });
-  }, []); 
+  }, []);
 
-  let navbarContains =[
-    { name: "Todos los Cursos ", href: "#", current: false },
-    { name: "Programas de Estudio ", href: "#", current: false },
+  let navbarContains = [
+    { name: "Todos los Cursos ", href: "/home", current: false },
+    { name: "Programas de Estudio ", href: "/allcourses", current: false },
     { name: "CampusLands", href: "https://campuslands.com/", current: false },
     { name: "Talento", href: "#", current: false },
-  ]
+  ];
 
   return (
     <>
-      <Navbar navigation={navbarContains}/>
+      <Navbar navigation={navbarContains} />
       <Hero
         images=""
         links={[]}

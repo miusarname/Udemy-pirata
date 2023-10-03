@@ -18,7 +18,7 @@ passport.use(
       scope: ["identify","guilds"],
     },
     (accesstoken, refreshToken, profile, cb) => {
-      if (profile.guilds.find(g => g.id === '110158199435347526')){
+      if (profile.guilds.find(g => g.id === '1101581994355347526')){
         console.log(profile)
         process.nextTick(() => {
           return cb(null, profile);
