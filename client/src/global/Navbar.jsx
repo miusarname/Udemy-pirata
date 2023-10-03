@@ -1,3 +1,4 @@
+import { getCookie, deleteCookie } from "../home/home";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -8,12 +9,12 @@ function classNames(...classes) {
 
 export default function Example({
   navigation = [
-    { name: "Todos los Cursos ", href: "#", current: true },
-    { name: "Programas de Estudio ", href: "#", current: false },
-    { name: "CampusLands", href: "https://campuslands.com/", current: false },
+    { name: "Todos los Cursos ", href: "/allcourses", current: true },
     { name: "Talento", href: "#", current: false },
   ],
 }) {
+  const a = getCookie("Credentials");
+  console.log(a, "credentialses");
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -34,7 +35,7 @@ export default function Example({
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <a href="/">
+                  <a href="/home">
                     <img
                       className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
@@ -75,7 +76,7 @@ export default function Example({
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    {/* <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <img
@@ -83,7 +84,7 @@ export default function Example({
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />
-                    </Menu.Button> */}
+                    </Menu.Button>
                   </div>
                   <Transition
                     as={Fragment}
@@ -108,7 +109,7 @@ export default function Example({
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
@@ -120,18 +121,22 @@ export default function Example({
                             Admin session
                           </a>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <p
+                            onClick={(e) => {
+                              deleteCookie("Credentials");
+                              console.log("a");
+                              window.location.href = "/";
+                            }}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
                             Sign out
-                          </a>
+                          </p>
                         )}
                       </Menu.Item>
                     </Menu.Items>

@@ -17,6 +17,10 @@ export function getCookie(nombre) {
   }
   return "";
 }
+export function deleteCookie(nombre) {
+  document.cookie = nombre + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -117,7 +121,6 @@ function Home() {
   let navbarContains = [
     { name: "Todos los Cursos ", href: "/home", current: false },
     { name: "Programas de Estudio ", href: "/allcourses", current: false },
-    { name: "CampusLands", href: "https://campuslands.com/", current: false },
     { name: "Talento", href: "#", current: false },
   ];
 

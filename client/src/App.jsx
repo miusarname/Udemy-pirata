@@ -1,13 +1,9 @@
 import React from 'react'
-import Lista from './pages/programas_de_estudio';
-
-function App({ list }) {
-  if (getCookie("Credentials") == "") {
-    window.location.href = "/";
-  }
+import Profile from "./profile/profile";
+function App() {
   return (
     <div>
-      <Lista />
+      <Profile />
     </div>
   )
 }
