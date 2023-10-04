@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../global/Navbar";
-import {getCookie} from '../home/home';
+import { getCookie } from '../home/home';
 import Info from "./components/information";
 
-function profile() {
+function Profile() {
+  const [cookieName, setCookieName] = useState("")
+  const [Role, setRole] = useState('')
+
+  useEffect(() => {
+    const credentials = JSON.parse(getCookie("Credentials"));
+    console.log(credentials,'aa')
+    setCookieName(credentials.global_name);
+  }, []);
+
   const gridContainerStyle = {
     display: "grid",
     gridTemplateColumns: "1fr 2fr 1fr", // Divide en tres columnas, la del medio es el doble de ancho
@@ -16,12 +25,13 @@ function profile() {
     justifyContent: "center",
     alignItems: "center",
   };
+
   return (
     <div>
       <Navbar />
-      <Info />
+      <Info name={cookieName} />
     </div>
   );
 }
 
-export default profile;
+export default Profile;

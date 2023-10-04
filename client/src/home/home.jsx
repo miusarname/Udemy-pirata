@@ -6,6 +6,11 @@ import Cta from "../global/CTA";
 import List from "../global/allCourses";
 import Footer from "../global/footer";
 
+export let inforCode
+
+function setCookie(nombre, valor, horas) {
+  document.cookie = nombre + "=" + valor + ";";
+}
 export function getCookie(nombre) {
   const name = nombre + "=";
   const cookies = decodeURIComponent(document.cookie).split(";");
@@ -18,26 +23,22 @@ export function getCookie(nombre) {
   return "";
 }
 export function deleteCookie(nombre) {
-  document.cookie = nombre + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie =
+    nombre + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
-
 
 function Home() {
   const [products, setProducts] = useState([]);
   const [organizedUserData, setOrganizedUserData] = useState([]);
   const urlParams = new URLSearchParams(window.location.search);
   const courseName = urlParams.get("c") || 1;
-  function setCookie(nombre, valor, diasParaExpirar) {
-    const fecha = new Date();
-    fecha.setTime(fecha.getTime() + diasParaExpirar * 60 * 60 * 1000);
-    const expira = "expires=" + fecha.toUTCString();
-    document.cookie = nombre + "=" + valor + ";" + expira + ";path=/";
-  }
+
 
   async function getdate() {
     if (courseName != 1) {
-      const url = window.location.href;
-      const index = url.indexOf("?");
+      const urle = window.location.href;
+      const index = urle.indexOf("?");
+      setCookie('link',courseName)
       const response = await fetch("http://localhost:3000/encript", {
         method: "POST",
         headers: {
@@ -51,20 +52,35 @@ function Home() {
       }
 
       const data = await response.json();
-      var parsedData = data.url;
-      setCookie("Credentials", parsedData, 0.5);
-      const baseUrl = index !== -1 ? url.slice(0, index) : url;
-      // Redireccionar a una nueva URL
-      window.location.href = baseUrl;
+      var parsedData = data;
+      let parsedData2 = data;
+      // Asegúrate de que parsedData no sea undefined antes de establecer la cookie
+      if ((await parsedData) != undefined) {
+        setCookie("Credentials", parsedData);
+        try {
+          setCookie("Credentials2", parsedData2.urle);
+        } catch (error) {
+          console.log('fasho')
+        }
+        localStorage.setItem('CrendentialsInfo', parsedData2.urle);
+
+        const baseUrl = index !== -1 ? urle.slice(0, index) : urle;
+        // Redireccionar a una nueva URL
+        window.location.href = baseUrl;
+      }
     }
+    return inforCode
   }
 
   useEffect(() => {
     // Realizar la solicitud Fetch aquí y asignar los datos a los estados locales
     getdate();
-    if (getCookie("Credentials") == "") {
+    console.log(inforCode,'a')
+    console.log(getCookie("Credentials"),'a')
+    if (!getCookie("Credentials")) {
       window.location.href = "/";
     }
+
     fetch("http://localhost:3000/list-all-courses")
       .then((response) => response.json())
       .then((data) => {
@@ -80,7 +96,7 @@ function Home() {
               imageSrc: user.imageSrc,
               imageAlt: user.imageAlt,
               description: user.description,
-              videoLinks: user.videoLinks
+              videoLinks: user.videoLinks,
             });
 
             tempOrganizedUserData.push({
@@ -91,22 +107,23 @@ function Home() {
               imageSrc: user.imageSrc,
               imageAlt: user.imageAlt,
               videoLinks: user.videoLinks.map((videoLink) => {
-                return({
-                name: videoLink[0],
-                links: videoLink[1].map((linkData) => ({
-                  name: linkData.name,
-                  href: linkData.href,
-                  Desc: linkData.Desc,
-                })),
-              })}),
+                return {
+                  name: videoLink[0],
+                  links: videoLink[1].map((linkData) => ({
+                    name: linkData.name,
+                    href: linkData.href,
+                    Desc: linkData.Desc,
+                  })),
+                };
+              }),
             });
           });
 
           // Ordenar "products" en el orden especificado
           tempProducts.sort((a, b) => a.id - b.id);
 
-          console.log(tempOrganizedUserData,'lista de product')
-          console.log(tempProducts,'temporal')
+          console.log(tempOrganizedUserData, "lista de product");
+          console.log(tempProducts, "temporal");
 
           // Actualizar los estados locales
           setProducts(tempProducts);
