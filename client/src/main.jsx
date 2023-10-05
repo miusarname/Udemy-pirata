@@ -1,15 +1,18 @@
-import React from "react";
+import React,{createContext} from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import Home from './home/home.jsx';
-import  PlayerV  from "./video/Player.jsx";
+import Login from "./log/login.jsx";
+import Home from "./home/home.jsx";
+import AllCourses from './pages/programas_de_estudio.jsx';
+import PlayerV from "./video/Player.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Login />,
   },
   {
     path: "/preview",
@@ -18,6 +21,14 @@ const router = createBrowserRouter([
   {
     path: "/video",
     element: <PlayerV />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path:"/allcourses",
+    element:<AllCourses/>
   }
 ]);
 

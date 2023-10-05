@@ -6,7 +6,6 @@ export function decrypt(req, res) {
   const decipher = crypto.createDecipher("aes-256-cbc", secret);
   let decrypted = decipher.update(encryptedValue, "hex", "utf8");
   decrypted += decipher.final("utf8");
-  console.log(decrypted);
   res.json({
     url: decrypted,
   });

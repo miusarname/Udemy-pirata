@@ -1,11 +1,9 @@
 import React from 'react'
-import Login from './log/login'
-
-
-function App({ list }) {
+import Profile from "./profile/profile";
+function App() {
   return (
     <div>
-      <Login />
+      <Profile />
     </div>
   )
 }

@@ -47,114 +47,258 @@ db.cursos.insertOne({
   ],
 });
 
-// use('udemy');
-
-// db.cursos.insertOne({
-//   name: "Docker",
-//   description:
-//     "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
-//   href: "#",
-//   imageSrc: "https://midu.dev/images/tags/node.png",
-//   imageAlt: "Logo Node",
-//   videoLinks: [
-//     [
-//       "Node.Js: De cero a experto",
-//       [
-//         {
-//           name: "video1",
-//           href: "linkvideo1",
-//           Desc: "primer holamundo con js",
-//         },
-//       ],
-//     ],
-//   ],
-// });
-
-  use("udemy");
-
-  db.cursos.insertOne({
-    name: "Node",
+use("udemy");
+db.cursos.insertMany([
+  {
+    name: "React",
     description:
       "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
-    href: "http://localhost:5173/video?curso=Docker ",
-    imageSrc: "https://midu.dev/images/tags/node.png",
-    imageAlt: "Logo Node",
+    href: "http://localhost:5173/video?curso=React",
+    imageSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png",
+    imageAlt: "Logo react",
     videoLinks: [
       [
-        "Node.Js: De cero a experto",
+        "React: De cero a experto ( Hooks y MERN )",
         [
           {
-            name: "video1",
-            href: "linkvideo1",
-            Desc: "primer holamundo con js",
+            name: "Introducción al curso",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=1&video=react-1-01-Introducción",
+            Desc: "Aprende los conceptos fundamentales de React.",
+          },
+          {
+            name: "¿Cómo funcionará el curso?",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=1&video=react-1-02-Como_funcionara_el_curso",
+            Desc: "Descubre cómo se organiza el curso y qué aprenderás.",
+          },
+          {
+            name: "¿Cómo hacer preguntas?",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=1&video=react-1-03-Como-hacer-preguntas",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Instalaciones necesarias y recomendadas",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=1&video=react-1-04-Instalaciones_necesarias_y_recomendadas",
+            Desc: "Descubre las herramientas que necesitas para seguir el curso.",
+          },
+          {
+            name: "Introducción a la sección",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=2&video=react-2-01-Introducción",
+            Desc: "Descubre lo que aprenderás en esta sección del curso.",
+          },
+          {
+            name: "¿Qué es React?",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=2&video=react-2-02-Que_es_React",
+            Desc: "Aprende los conceptos básicos de React y su importancia.",
+          },
+          {
+            name: "Introducción a Babel",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=2&video=react-2-04-Introduccion_a_Babel",
+            Desc: "Explora la herramienta Babel y cómo se relaciona con React.",
+          },
+          {
+            name: "Introducción a la sección",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-01-Introduccion",
+            Desc: "Comienza explorando los fundamentos de la sección.",
+          },
+          {
+            name: "Inicio de proyecto - Bases de JavaScript",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-03-Inicio_de_proyecto_-_Bases_de_JavaScript",
+            Desc: "Comienza tu proyecto aprendiendo las bases de JavaScript.",
+          },
+          {
+            name: "Variables y constantes",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-04-Variables_y_constantes",
+            Desc: "Aprende sobre variables y constantes en JavaScript.",
+          },
+          {
+            name: "Template String",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-05-Template_String",
+            Desc: "Descubre cómo utilizar template strings en JavaScript para crear cadenas de texto más flexibles y legibles.",
+          },
+          {
+            name: "Objetos lilterales",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-06-Objetos_lilterales",
+            Desc: "Explora el uso de objetos literales en JavaScript para organizar y manipular datos de manera efectiva.",
+          },
+          {
+            name: "Arreglos",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-07-Arreglos",
+            Desc: "Aprende a trabajar con arreglos en JavaScript para almacenar y manipular conjuntos de datos de manera eficiente.",
+          },
+          {
+            name: "Desestructuación de Objetos",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-09-Desestructruacion_de_Objetos",
+            Desc: "Domina la desestructuración de objetos en JavaScript para acceder y utilizar fácilmente sus propiedades.",
+          },
+          {
+            name: "Desestructuación de Arreglos",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-10-Desestructruacion_de_Arreglos",
+            Desc: "Aprende a realizar la desestructuración de arreglos en JavaScript para extraer y utilizar elementos específicos de manera efectiva.",
+          },
+          {
+            name: "Import, export y funciones comunes de arreglos",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-11-Import_export_y_funciones_comunes_de_arreglos",
+            Desc: "Explora cómo importar, exportar y utilizar funciones comunes de arreglos en JavaScript para trabajar con módulos y datos de manera más eficiente.",
+          },
+          {
+            name: "Múltiples exportaciones y exportaciones por defecto",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-12-Multiples_exportaciones_y_exportaciones_por_defecto",
+            Desc: "Comprende cómo realizar múltiples exportaciones y exportaciones por defecto en JavaScript para organizar y compartir tu código de manera efectiva.",
+          },
+          {
+            name: "Promesas",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-13-Promesa",
+            Desc: "Explora el concepto de promesas en JavaScript y cómo se utilizan para manejar operaciones asincrónicas de manera más ordenada y eficiente.",
+          },
+          {
+            name: "Fetch API",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-14-Fetch_API",
+            Desc: "Aprende a utilizar la Fetch API en JavaScript para realizar solicitudes HTTP y trabajar con datos de servidores de manera efectiva.",
+          },
+          {
+            name: "Async_-_Await",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-15-Async_-_Await",
+            Desc: "Domina el uso de async/await en JavaScript para simplificar la gestión de operaciones asincrónicas y mejorar la legibilidad de tu código..",
+          },
+          {
+            name: "Operador condicional ternario",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=3&video=react-3-16-Operador_condicional_ternario",
+            Desc: "Aprende a utilizar el operador condicional ternario en JavaScript para tomar decisiones basadas en condiciones de manera concisa.",
+          },
+          {
+            name: "¿Qué son los componentes?",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=4&video=react-4-03-Que_son_los_componente",
+            Desc: "Los componentes son elementos esenciales en el desarrollo de aplicaciones web y de software. Estos módulos permiten dividir la interfaz y la lógica de una aplicación en partes más pequeñas y reutilizables, lo que facilita la construcción y el mantenimiento del código.",
+          },
+          {
+            name: "Primera aplicación de React",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=4&video=react-4-04-Primera_aplicacion_de_React",
+            Desc: "Crea tu primera aplicación utilizando React.",
+          },
+          {
+            name: "Estructura de directorios - CRA",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=4&video=react-4-05-Estructura_de_directorios_-_CRA",
+            Desc: "Aprende sobre la estructura de directorios en Create React App.",
+          },
+          {
+            name: "Estructura de directorios - Vite",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=4&video=react-4-06-Estructura_de_directorios_-_Vite",
+            Desc: "Explora la estructura de directorios en Vite para proyectos React.",
+          },
+          {
+            name: "Hola Mundo en React",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=4&video=react-4-07-Hola_Mundo_en_React",
+            Desc: "Desarrolla tu Hola Mundo en React para dar tus primeros pasos en esta biblioteca de JavaScript.",
+          },
+          {
+            name: "Tarea - Crear un nuevo componente",
+            href: "http://192.168.128.23:5010/cursos/play?course=react&seccion=4&video=react-4-08-Nuestro_primer_Componente",
+            Desc: "Tu tarea es crear un nuevo componente en tu aplicación de React para agregar funcionalidad o contenido específico a tu proyecto.",
           },
         ],
       ],
     ],
-  });
+  },
+]);
 
-db.cursos.insertOne({
-  name: "Node.Js: De cero a experto",
-  description:
-    "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
-  href: "#",
-  imageSrc: "https://midu.dev/images/tags/node.png",
-  imageAlt: "Logo Node",
-  videoLinks: [
-    [
-      "Node.Js: De cero a experto",
+db.cursos.insertMany([
+  {
+    name: "Docker",
+    description:
+      "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
+    href: "http://localhost:5173/video?curso=Docker",
+    imageSrc:
+      "https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/ywjqppks5ffcnbfjuttq",
+    imageAlt: "Logo Docker",
+    videoLinks: [
       [
-        {
-          name: "video1",
-          href: "linkvideo1",
-          Desc: "primer holamundo con js",
-        },
+        "Docker - Guía práctica de uso para desarrolladores",
+        [
+          {
+            name: "Introducción al curso",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=1&video=docker-1-01-introduccion_al_curso",
+            Desc: "Aprende los conceptos fundamentales de React.",
+          },
+          {
+            name: "¿Cómo funcionará el curso?",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=1&video=docker-1-02-Como_funcionara_el_curso",
+            Desc: "Descubre cómo se organiza el curso y qué aprenderás.",
+          },
+          {
+            name: "¿Cómo hacer preguntas?",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=1&video=docker-1-03-Como_hacer_preguntas",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Instalaciones necesarias y recomendadas",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=1&video=docker-1-04-Instalaciones_necesarias",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Instalación Docker - Linux Ubuntu",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=1&video=docker-1-05-Instalacion_Docker_-_Linux_Ubuntu",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Instalación Docker - Linux manual",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=1&video=docker-1-06-Instalacion_Docker_-_Linux_manual",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Guía de atajos para el curso",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=1&video=docker-1-07-Guia_de_atajos_para_el_curso",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Introducción a la sección",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-01-Introduccion_a_la_seccion",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Hola Mundo en Docker",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-04-Hola_Mundo_en_Docker",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+          {
+            name: "Borrar contenedores e imágenes",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-05-Borrar_contenedores_e_imagenes",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          }, {
+            name: "Docker Desktop - Mismos comandos ejecutados",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-06-Docker_Desktop_-_Mismos_comandos_ejecutados",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },{
+            name: "Publish and Detached modes",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-07-Publish_and_Detached_modes",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },{
+            name: "Variables de entorno",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-08-Variables_de_entorno",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },{
+            name: "Usar la imagen de Postgres",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-09-Usar_la_imagen_de_Postgres",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },{
+            name: "Multiples instancias de Postgres",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-10-Multiples_instancias_de_la_misma_imagen",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },{
+            name: "Logs del contenedor",
+            href: "http://192.168.128.23:5010/cursos/play?course=docker&seccion=2&video=docker-2-11-Logs_del_contenedor",
+            Desc: "Aprende cómo obtener ayuda y hacer preguntas durante el curso.",
+          },
+        ],
       ],
     ],
-  ],
-});
-
-use("udemy");
-db.cursos.insertOne({
-  name: "Nou",
-  description:
-    "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
-  href: "http://localhost:5173/video?curso=Nou",
-  imageSrc: "https://midu.dev/images/tags/node.png",
-  imageAlt: "Logo Node",
-  videoLinks: [
-    [
-      "Node.Js: De cero a experto",
-      [
-        {
-          name: "video1",
-          href: "https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164",
-          Desc: "primer holamundo con js",
-        },
-        {
-          name: "video1",
-          href: "https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164",
-          Desc: "primer holamundo con js",
-        },
-        {
-          name: "video1",
-          href: "https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164",
-          Desc: "primer holamundo con js",
-        },
-        {
-          name: "video1",
-          href: "https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164",
-          Desc: "primer holamundo con js",
-        },
-      ],
-    ],
-  ],
-});
-
+  },
+]);
 use("udemy");
 
 db.comentarios.insertOne({
   content: "Este video es muy informativo.",
   author: "usuario123",
-  videoId: "https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164"
+  videoId:
+    "https://platform.thinkific.com/videoproxy/v1/play/ce7ofnh9oor6qvkc1740?&autoplay=true&crosstime=164",
 });

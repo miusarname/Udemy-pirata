@@ -1,20 +1,90 @@
 import Navbar from "../global/Navbar";
-import  { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 import Hero from "../global/Hero";
 import Cta from "../global/CTA";
-import List from "./components/allCourses";
+import List from "../global/allCourses";
 import Footer from "../global/footer";
+
+export let inforCode
+
+function setCookie(nombre, valor, horas) {
+  document.cookie = nombre + "=" + valor + ";";
+}
+export function getCookie(nombre) {
+  const name = nombre + "=";
+  const cookies = decodeURIComponent(document.cookie).split(";");
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+}
+export function deleteCookie(nombre) {
+  document.cookie =
+    nombre + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
 
 function Home() {
   const [products, setProducts] = useState([]);
   const [organizedUserData, setOrganizedUserData] = useState([]);
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseName = urlParams.get("c") || 1;
+
+
+  async function getdate() {
+    if (courseName != 1) {
+      const urle = window.location.href;
+      const index = urle.indexOf("?");
+      setCookie('link',courseName)
+      const response = await fetch("http://localhost:3000/encript", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ encryptedValue: courseName }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error en la solicitud fetch de desencriptación");
+      }
+
+      const data = await response.json();
+      var parsedData = data;
+      let parsedData2 = data;
+      // Asegúrate de que parsedData no sea undefined antes de establecer la cookie
+      if ((await parsedData) != undefined) {
+        setCookie("Credentials", parsedData);
+        try {
+          setCookie("Credentials2", parsedData2.urle);
+        } catch (error) {
+          console.log('fasho')
+        }
+        localStorage.setItem('CrendentialsInfo', parsedData2.urle);
+
+        const baseUrl = index !== -1 ? urle.slice(0, index) : urle;
+        // Redireccionar a una nueva URL
+        window.location.href = baseUrl;
+      }
+    }
+    return inforCode
+  }
 
   useEffect(() => {
     // Realizar la solicitud Fetch aquí y asignar los datos a los estados locales
-    fetch('http://localhost:3000/list-all-courses')
-      .then(response => response.json())
-      .then(data => {
-        if (data.message === 'success') {
+    getdate();
+    console.log(inforCode,'a')
+    console.log(getCookie("Credentials"),'a')
+    if (!getCookie("Credentials")) {
+      window.location.href = "/";
+    }
+
+    fetch("http://localhost:3000/list-all-courses")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === "success") {
           const tempProducts = [];
           const tempOrganizedUserData = [];
 
@@ -26,6 +96,7 @@ function Home() {
               imageSrc: user.imageSrc,
               imageAlt: user.imageAlt,
               description: user.description,
+              videoLinks: user.videoLinks,
             });
 
             tempOrganizedUserData.push({
@@ -35,40 +106,44 @@ function Home() {
               href: user.href,
               imageSrc: user.imageSrc,
               imageAlt: user.imageAlt,
-              videoLinks: user.videoLinks.map(videoLink => ({
-                name: videoLink[0],
-                links: videoLink[1].map(linkData => ({
-                  name: linkData.name,
-                  href: linkData.href,
-                  Desc: linkData.Desc,
-                })),
-              })),
+              videoLinks: user.videoLinks.map((videoLink) => {
+                return {
+                  name: videoLink[0],
+                  links: videoLink[1].map((linkData) => ({
+                    name: linkData.name,
+                    href: linkData.href,
+                    Desc: linkData.Desc,
+                  })),
+                };
+              }),
             });
           });
 
           // Ordenar "products" en el orden especificado
           tempProducts.sort((a, b) => a.id - b.id);
 
+          console.log(tempOrganizedUserData, "lista de product");
+          console.log(tempProducts, "temporal");
+
           // Actualizar los estados locales
           setProducts(tempProducts);
           setOrganizedUserData(tempOrganizedUserData);
         }
       })
-      .catch(error => {
-        console.error('Error al realizar la solicitud Fetch:', error);
+      .catch((error) => {
+        console.error("Error al realizar la solicitud Fetch:", error);
       });
-  }, []); 
+  }, []);
 
-  let navbarContains =[
-    { name: "Todos los Cursos ", href: "#", current: false },
-    { name: "Programas de Estudio ", href: "#", current: false },
-    { name: "CampusLands", href: "https://campuslands.com/", current: false },
+  let navbarContains = [
+    { name: "Todos los Cursos ", href: "/home", current: false },
+    { name: "Programas de Estudio ", href: "/allcourses", current: false },
     { name: "Talento", href: "#", current: false },
-  ]
+  ];
 
   return (
     <>
-      <Navbar navigation={navbarContains}/>
+      <Navbar navigation={navbarContains} />
       <Hero
         images=""
         links={[]}
