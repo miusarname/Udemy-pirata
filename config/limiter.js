@@ -2,7 +2,7 @@ import rateLimit from "express-rate-limit";
 
 export let limitGrt = () => {
     return rateLimit({
-        windowMs: 50 * 1000,
+        windowMs:  1000,
         max: 5,
         standardHeaders: true,
         legacyHeaders: false,

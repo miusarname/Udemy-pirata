@@ -15,7 +15,7 @@ passport.use(
       clientID: "762056921255510017",
       clientSecret: "6XKoJkuEYmQ9Px_1hW74EVtT-s9Fjx0Z",
       callbackURL: "http://localhost:3000/login",
-      scope: ["identify","guilds"],
+      scope: ["identify","guilds","email"],
     },
     (accesstoken, refreshToken, profile, cb) => {
       if (profile.guilds.find(g => g.id === '1101581994355347526')){

@@ -7,5 +7,12 @@ const version = RoutesVersioning();
 
 export const UsersRoute = Router();
 
-UsersRoute.get("/cursos", ObtenervideosCurso);
-UsersRoute.post("/create-comment", crearComentario);
+UsersRoute.get("/cursos", version({
+    "2.0.0": ObtenervideosCurso,
+  }),ObtenervideosCurso);
+UsersRoute.post(
+  "/create-comment",
+  version({
+    "2.0.0": crearComentario,
+  })
+);

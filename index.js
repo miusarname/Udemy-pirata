@@ -21,6 +21,7 @@ index.set("port", process.env.PORT || 3000);
 
 // Middlewares
 index.use(morgan("dev"));
+index.use(limitGrt())
 index.use(cors());
 index.use(express.json());
 index.use(

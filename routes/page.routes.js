@@ -10,8 +10,18 @@ const version = RoutesVersioning();
 
 export const PageRoute = Router();
 
-PageRoute.get("/list-all-courses", Obtenervideos);
-PageRoute.get("/comments", ObtenerComentariosVideo);
+PageRoute.get(
+  "/list-all-courses",
+  version({
+    "1.0.0": Obtenervideos,
+  })
+);
+PageRoute.get(
+  "/comments",
+  version({
+    "1.0.0": ObtenerComentariosVideo,
+  })
+);
 PageRoute.get(
   "/login",
   passport.authenticate("discord", { failureRedirect: "/return" }),
