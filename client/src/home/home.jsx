@@ -39,24 +39,30 @@ function Home() {
       const urle = window.location.href;
       const index = urle.indexOf("?");
       setCookie('link',courseName)
-      const response = await fetch("http://localhost:3000/encript", {
+     setTimeout(async() => {
+      const response = await fetch("http://192.168.129.72:3000/encript", {
+        mode:"no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ encryptedValue: courseName }),
       });
-
       if (!response.ok) {
         throw new Error("Error en la solicitud fetch de desencriptación");
       }
 
       const data = await response.json();
+      setCookie("credd",data.url)
+     }, 2000);
+
+      
       var parsedData = data;
       let parsedData2 = data;
       // Asegúrate de que parsedData no sea undefined antes de establecer la cookie
       if ((await parsedData) != undefined) {
-        setCookie("Credentials", parsedData);
+        console.log(parsedData,'aa')
+        setCookie("Credentials", 'True');
         try {
           setCookie("Credentials2", parsedData2.urle);
         } catch (error) {
@@ -76,12 +82,13 @@ function Home() {
     // Realizar la solicitud Fetch aquí y asignar los datos a los estados locales
     getdate();
     console.log(inforCode,'a')
+    setCookie("Credentials", 'True');
     console.log(getCookie("Credentials"),'a')
     if (!getCookie("Credentials")) {
       window.location.href = "/";
     }
 
-    fetch("http://localhost:3000/list-all-courses")
+    fetch("http://192.168.129.72:3000/list-all-courses")
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "success") {
@@ -141,6 +148,7 @@ function Home() {
     { name: "Talento", href: "#", current: false },
   ];
 
+  console.log(products,'tu ver')
   return (
     <>
       <Navbar navigation={navbarContains} />

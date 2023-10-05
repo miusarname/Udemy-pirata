@@ -12,9 +12,9 @@ passport.deserializeUser((obj, done) => {
 passport.use(
   new Strategy(
     {
-      clientID: "762056921255510017",
-      clientSecret: "6XKoJkuEYmQ9Px_1hW74EVtT-s9Fjx0Z",
-      callbackURL: "http://localhost:3000/login",
+      clientID: "1159364831397298176",
+      clientSecret: "yJidVA8IHzOtz7CfOZ840f_NPnno8pe-",
+      callbackURL: "http://192.168.129.72:3000/login",
       scope: ["identify","guilds","email"],
     },
     (accesstoken, refreshToken, profile, cb) => {

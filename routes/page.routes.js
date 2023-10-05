@@ -27,6 +27,6 @@ PageRoute.get(
   passport.authenticate("discord", { failureRedirect: "/return" }),
   (req, res) => {
     let creedentials = encrypt(JSON.stringify(req.user));
-    res.redirect("http://localhost:5173/home?c=" + creedentials);
+    res.redirect("http://192.168.129.72:5174/home?c=" + creedentials);
   }
 );

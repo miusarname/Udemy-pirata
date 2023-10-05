@@ -39,7 +39,7 @@ index.use(passport.session());
 index.use("/token", crearToken);
 index.post("/encript", decrypt);
 index.get("/return", (req, res) => {
-  res.redirect("http://localhost:5173/");
+  res.redirect("http://192.168.129.72:5174");
 });
 
 //Page Routes

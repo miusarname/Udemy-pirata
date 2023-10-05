@@ -8,7 +8,7 @@ export default function ProgramaDeStudio() {
 
   useEffect(() => {
     // Realizar la solicitud Fetch aquí y asignar los datos a los estados locales
-    fetch("http://localhost:3000/list-all-courses")
+    fetch("http://192.168.129.72:3000/list-all-courses")
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "success") {

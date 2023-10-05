@@ -23,7 +23,7 @@ function App() {
     const fetchData = async () => {
       try {
         if (curso) {
-          const apiUrl = `http://localhost:3000/cursos?course=${curso}`;
+          const apiUrl = `http://192.168.129.72:3000/cursos?course=${curso}`;
           const response = await fetch(apiUrl);
 
           if (!response.ok) {
@@ -38,7 +38,7 @@ function App() {
         }
 
         if (mParam) {
-          const response = await fetch("http://localhost:3000/encript", {
+          const response = await fetch("http://192.168.129.72:3000/encript", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

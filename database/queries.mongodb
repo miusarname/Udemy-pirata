@@ -53,7 +53,7 @@ db.cursos.insertMany([
     name: "React",
     description:
       "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
-    href: "http://localhost:5173/video?curso=React",
+    href: "http://192.168.129.72:5174/video?curso=React",
     imageSrc:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png",
     imageAlt: "Logo react",
@@ -207,7 +207,7 @@ db.cursos.insertMany([
     name: "Docker",
     description:
       "El objetivo principal del curso es enseñarte JavaScript actual, empezando de cero conocimiento en JavaScript hasta llevarte a un nivel avanzado y competitivo en el mercado laboral actual.",
-    href: "http://localhost:5173/video?curso=Docker",
+    href: "http://192.168.129.72:5174/video?curso=Docker",
     imageSrc:
       "https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/ywjqppks5ffcnbfjuttq",
     imageAlt: "Logo Docker",

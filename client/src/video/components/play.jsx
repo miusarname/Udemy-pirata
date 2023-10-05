@@ -18,7 +18,7 @@ export default function Example({ link }) {
     };
 
     try {
-      const createCommentResponse = await fetch("http://localhost:3000/create-comment", {
+      const createCommentResponse = await fetch("http://192.168.129.72:3000/create-comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export default function Example({ link }) {
     calculateIframeHeight();
     window.addEventListener("resize", calculateIframeHeight);
 
-    fetch(`http://localhost:3000/comments?video=${videolink}`)
+    fetch(`http://192.168.129.72:3000/comments?video=${videolink}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data, "comments");
